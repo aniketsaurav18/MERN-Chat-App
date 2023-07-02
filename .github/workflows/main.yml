@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v0.1.10
       with:
         host: ${{ secrets.SSH_ID }}
+        password: ${{ secrets.SSH_PASS }}
         username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_PASS }}
         script: |
             whoami
