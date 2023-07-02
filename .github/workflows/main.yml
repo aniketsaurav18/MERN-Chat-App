@@ -15,4 +15,11 @@ jobs:
         password: ${{ secrets.SSH_PASS }}
         username: ${{ secrets.SSH_USERNAME }}
         script: |
-            whoami
+            cd MERN-Chat-App
+            git pull
+            cd client
+            npm run build
+            cd ..
+            
+            
+            
