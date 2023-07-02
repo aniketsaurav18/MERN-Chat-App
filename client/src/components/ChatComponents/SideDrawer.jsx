@@ -146,7 +146,7 @@ const SideDrawer = () => {
           </Button>
         </Tooltip>
         <Text fontSize="2xl" fontFamily="work sans">
-          Chatty
+          Chat App
         </Text>
         <div>
           <Menu>
