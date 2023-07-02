@@ -17,7 +17,7 @@ import "./style.css";
 import Lottie from "lottie-react";
 import animationData from "../../assets/typing.json";
 
-const ENDPOINT = `${import.meta.env.VITE_BACKEND_BASE_URL}`;
+const ENDPOINT = `http://143.110.244.1`;
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -25,8 +25,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
-  const [typing, setTyping] = useState(false);
-  const [istyping, setIsTyping] = useState(false);
+  // const [typing, setTyping] = useState(false);
+  // const [istyping, setIsTyping] = useState(false);
 
   const { user, selectedChat, setSelectedChat, notification, setNotification } =
     ChatState();
@@ -61,12 +61,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       setLoading(true);
-      const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_BASE_URL}/api/message/${
-          selectedChat._id
-        }`,
-        config
-      );
+      const res = await fetch(`/api/message/${selectedChat._id}`, config);
       const data = await res.json();
       // console.log(data);
       if (!res.ok) {
@@ -108,10 +103,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           }),
         };
         setNewMessage("");
-        const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_BASE_URL}/api/message/`,
-          config
-        );
+        const res = await fetch(`/api/message/`, config);
         const data = await res.json();
         console.log(data);
         socket.emit("new message", data);
@@ -150,21 +142,21 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
     //typing indicator logic
-    if (!socketConnected) return;
-    if (!typing) {
-      setTyping(true);
-      socket.emit("typing", selectedChat._id);
-    }
-    let lastTypingTime = new Date().getTime();
-    var timerLength = 2000;
-    setTimeout(() => {
-      var timeNow = new Date().getTime();
-      var timeDiff = timeNow - lastTypingTime;
-      if (timeDiff >= timerLength && typing) {
-        socket.emit("stop typing", selectedChat._id);
-        setTyping(false);
-      }
-    }, timerLength);
+    // if (!socketConnected) return;
+    // if (!typing) {
+    //   setTyping(true);
+    //   socket.emit("typing", selectedChat._id);
+    // }
+    // let lastTypingTime = new Date().getTime();
+    // var timerLength = 2000;
+    // setTimeout(() => {
+    //   var timeNow = new Date().getTime();
+    //   var timeDiff = timeNow - lastTypingTime;
+    //   if (timeDiff >= timerLength && typing) {
+    //     socket.emit("stop typing", selectedChat._id);
+    //     setTyping(false);
+    //   }
+    // }, timerLength);
   };
 
   return (
@@ -220,13 +212,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               </div>
             )}
             <FormControl onKeyDown={sendMessage} isRequired mt={3}>
-              {istyping ? (
+              {/* {istyping ? (
                 <Lottie
                   animationData={animationData}
                   style={{ marginBottom: 15, marginLeft: 0, width: "9%" }}
                   rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
                 />
-              ) : null}
+              ) : null} */}
               <Input
                 variant={"filled"}
                 bg="#E0E0E0"

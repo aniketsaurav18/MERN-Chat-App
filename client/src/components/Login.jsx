@@ -38,7 +38,7 @@ const Login = () => {
       };
       // console.log(import.meta.env.VITE_BACKEND_BASE_URL);
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_BASE_URL}/api/user/login`,
+        `/api/user/login`,
         { email, password },
         options
       );
@@ -63,7 +63,7 @@ const Login = () => {
       }
       toast({
         title: "Error occured",
-        description: errMessage,
+        description: errMessage || error.message,
         status: "error",
         duration: 5000,
         isClosable: true,

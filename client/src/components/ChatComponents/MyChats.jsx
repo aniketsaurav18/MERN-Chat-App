@@ -9,16 +9,13 @@ const MyChats = ({ fetchAgain }) => {
   const toast = useToast();
   const fetchChats = async () => {
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_BASE_URL}/api/chat`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+      const res = await fetch(`/api/chat`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       const data = await res.json();
       // console.log(data);
       if (res.status === 200) {

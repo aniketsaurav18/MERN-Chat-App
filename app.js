@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const cors = require("cors");
 const User = require("./model/userModel");
 const userRoutes = require("./routes/userRouter");
 const chatRoutes = require("./routes/chatRouter");
@@ -11,7 +12,6 @@ const path = require("path");
 connectDB();
 
 const app = express();
-const cors = require("cors");
 
 app.use(cors());
 
@@ -55,12 +55,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-const server = app.listen(5000);
-console.log("server is listening on port 5000");
+const server = app.listen(process.env.PORT || 5000);
+console.log(`server is listening on port ${process.env.PORT || 5000}`);
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:5173",
+    origin: `http://localhost:${process.env.PORT || 5000}`,
   },
 });
 
