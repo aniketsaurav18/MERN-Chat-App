@@ -67,6 +67,7 @@ exports.searchUser = asyncHandler(async (req, res, next) => {
       .select("-password -__v");
     if (user.length === 0) {
       res.status(204).json({ message: "User Not Found" });
+      next();
     }
     res.status(201).json(user);
   } catch (err) {

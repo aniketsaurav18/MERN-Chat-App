@@ -81,7 +81,9 @@ const Login = () => {
           onChange={(e) => {
             setemail(e.target.value);
           }}
-          id="email"
+          id={() => {
+            return new Date().getTime().toString() + "email";
+          }}
         />
       </FormControl>
       <FormControl id="password" isRequired>
@@ -92,7 +94,9 @@ const Login = () => {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-          id="password"
+          id={() => {
+            return new Date().getTime().toString() + "password";
+          }}
         />
       </FormControl>
       <Button

@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRouter");
 const chatRoutes = require("./routes/chatRouter");
 const messageRoutes = require("./routes/messageRouter");
 const connectDB = require("./utils/connectDB");
+const path = require("path");
 
 connectDB();
 
@@ -23,6 +24,22 @@ app.get("/test", (req, res) => {
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
+
+//--------------- Deployment -----------------
+
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/client/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname1, "client", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running...");
+  });
+}
+
+//--------------- Deployment -----------------
 
 app.use((req, res, next) => {
   const error = new Error(`Not Found ${req.originalUrl}`);
