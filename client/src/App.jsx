@@ -1,8 +1,8 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import ChatPage from "./pages/ChatPage";
 // import { Switch } from "@chakra-ui/react";
-import ChatProvider, { ChatState } from "./context/chatProvider";
+// import ChatProvider, { ChatState } from "./context/chatProvider";
 import "./App.css";
 function App() {
   return (
