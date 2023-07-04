@@ -14,8 +14,6 @@ import ProfileModal from "./ProfileModel";
 import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 import "./style.css";
-import Lottie from "lottie-react";
-import animationData from "../../assets/typing.json";
 
 const ENDPOINT = `${
   import.meta.env.VITE_ENVIRONMENT == "development"
