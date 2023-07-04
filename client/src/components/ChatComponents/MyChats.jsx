@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ChatState } from "../../context/chatProvider";
 import { Box, Stack, Text, useToast } from "@chakra-ui/react";
 import ChatLoading from "./ChatLoading";
@@ -9,13 +9,20 @@ const MyChats = ({ fetchAgain }) => {
   const toast = useToast();
   const fetchChats = async () => {
     try {
-      const res = await fetch(`/api/chat`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_ENVIRONMENT == "development"
+            ? import.meta.env.VITE_BACKEND_BASE_URL
+            : ""
+        }/api/chat`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const data = await res.json();
       // console.log(data);
       if (res.status === 200) {

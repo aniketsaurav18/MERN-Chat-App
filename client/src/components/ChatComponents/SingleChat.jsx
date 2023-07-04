@@ -17,7 +17,11 @@ import "./style.css";
 import Lottie from "lottie-react";
 import animationData from "../../assets/typing.json";
 
-const ENDPOINT = `http://143.110.244.1`;
+const ENDPOINT = `${
+  import.meta.env.VITE_ENVIRONMENT == "development"
+    ? import.meta.env.VITE_BACKEND_BASE_URL
+    : "http://143.110.244.1"
+}`;
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -61,7 +65,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       setLoading(true);
-      const res = await fetch(`/api/message/${selectedChat._id}`, config);
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_ENVIRONMENT == "development"
+            ? import.meta.env.VITE_BACKEND_BASE_URL
+            : ""
+        }/api/message/${selectedChat._id}`,
+        config
+      );
       const data = await res.json();
       // console.log(data);
       if (!res.ok) {
@@ -103,7 +114,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           }),
         };
         setNewMessage("");
-        const res = await fetch(`/api/message/`, config);
+        const res = await fetch(
+          `${
+            import.meta.env.VITE_ENVIRONMENT == "development"
+              ? import.meta.env.VITE_BACKEND_BASE_URL
+              : ""
+          }/api/message/`,
+          config
+        );
         const data = await res.json();
         console.log(data);
         socket.emit("new message", data);

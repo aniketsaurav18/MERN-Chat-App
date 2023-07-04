@@ -62,13 +62,20 @@ const SideDrawer = () => {
     }
     try {
       setLoading(true);
-      const res = await fetch(`/api/user/search?key=${search}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_ENVIRONMENT == "development"
+            ? import.meta.env.VITE_BACKEND_BASE_URL
+            : ""
+        }/api/user/search?key=${search}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       if (res.status === 204) {
         setLoading(false);
         return toast({
@@ -110,7 +117,14 @@ const SideDrawer = () => {
         },
         body: JSON.stringify({ userId }),
       };
-      const res = await fetch(`/api/chat`, config);
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_ENVIRONMENT == "development"
+            ? import.meta.env.VITE_BACKEND_BASE_URL
+            : ""
+        }/api/chat`,
+        config
+      );
       setSelectedChat(await res.json());
       setLoadingChat(false);
       onClose();

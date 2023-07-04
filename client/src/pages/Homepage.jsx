@@ -7,7 +7,7 @@ import {
   Box,
   Container,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { useNavigate } from "react-router-dom";

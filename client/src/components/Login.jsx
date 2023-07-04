@@ -38,7 +38,11 @@ const Login = () => {
       };
       // console.log(import.meta.env.VITE_BACKEND_BASE_URL);
       const { data } = await axios.post(
-        `/api/user/login`,
+        `${
+          import.meta.env.VITE_ENVIRONMENT == "development"
+            ? import.meta.env.VITE_BACKEND_BASE_URL
+            : ""
+        }/api/user/login`,
         { email, password },
         options
       );

@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useState } from "react";
 import {
   Button,
@@ -47,7 +47,11 @@ const SignUp = () => {
       };
       // console.log(import.meta.env.VITE_BACKEND_BASE_URL);
       const { data } = await axios.post(
-        `/api/user`,
+        `${
+          import.meta.env.VITE_ENVIRONMENT == "development"
+            ? import.meta.env.VITE_BACKEND_BASE_URL
+            : ""
+        }/api/user`,
         { name, email, password },
         options
       );
